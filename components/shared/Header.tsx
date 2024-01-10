@@ -1,5 +1,7 @@
+import { SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 export default function Header() {
   return (
@@ -13,7 +15,13 @@ export default function Header() {
             alt="Evently logo"
           />
         </Link>
-        <div className="flex justify-end gap-3 w-32"></div>
+        <div className="flex justify-end gap-3 w-32">
+          <SignedOut>
+            <Button asChild className="rounded-full" size="lg">
+              <Link href="/sign-in">Login</Link>
+            </Button>
+          </SignedOut>
+        </div>
       </div>
     </header>
   );
