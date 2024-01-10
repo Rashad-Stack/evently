@@ -34,6 +34,9 @@ export default function Home() {
         <h2 className="h2-bold">
           Trusted by <br /> Thousand of Events
         </h2>
+        <div className="flex w-full flex-col gap-5 md:flex-row">
+          Search Category filters
+        </div>
       </section>
     </>
   );
