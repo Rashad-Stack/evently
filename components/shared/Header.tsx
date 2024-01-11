@@ -24,7 +24,7 @@ export default function Header() {
           </nav>
         </SignedIn>
 
-        <div className="flex justify-end gap-3 w-32">
+        <div className="flex w-32 justify-end gap-3">
           <SignedIn>
             <UserButton afterSignOutUrl="/" />
             <MobileNav />
