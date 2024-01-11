@@ -18,15 +18,14 @@ export default function Home() {
             <Button size="lg" asChild className="button w-full sm:w-fit">
               <Link href="#events">Explore Now</Link>
             </Button>
-
-            <Image
-              src="/assets/images/hero.png"
-              width={1000}
-              height={1000}
-              alt="Hero Image"
-              className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]"
-            />
           </div>
+          <Image
+            src="/assets/images/hero.png"
+            width={1000}
+            height={1000}
+            alt="Hero Image"
+            className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]"
+          />
         </div>
       </section>
 
