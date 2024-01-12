@@ -9,7 +9,7 @@ import Checkout from "./Checkout";
 export default function CheckoutButton({ event }: { event: IEvent }) {
   const { user } = useUser();
   const userId = user?.publicMetadata.userId as string;
-  const isEventCreator = user?.publicMetadata.userId === event.organizer._id;
+
   const hasEventFinished = new Date(event.endDateTime) < new Date();
 
   return (

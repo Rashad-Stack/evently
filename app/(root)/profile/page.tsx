@@ -1,6 +1,8 @@
 import Collection from "@/components/shared/Collection";
 import { Button } from "@/components/ui/button";
 import { getEventsByUser } from "@/lib/actions/event.action";
+import { getOrdersByUser } from "@/lib/actions/order.action";
+import { IOrder } from "@/lib/database/models/order.model";
 import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 
@@ -11,6 +13,12 @@ export default async function ProfilePage() {
     userId,
     page: 1,
   });
+  const orders = await getOrdersByUser({
+    userId,
+    page: 1,
+  });
+  const orderedEvents = orders?.data?.map((order: IOrder) => order.event) || [];
+
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
@@ -22,7 +30,18 @@ export default async function ProfilePage() {
         </div>
       </section>
 
-      <section className="wrapper my-8"></section>
+      <section className="wrapper my-8">
+        <Collection
+          data={orderedEvents}
+          emptyTitle="No event tickets purchased yet"
+          emptyStatusSubtext="No worries - plenty of exciting events to explore!"
+          collectionType="My_Tickets"
+          limit={3}
+          page={1}
+          urlParamName="ordersPage"
+          totalPages={orders?.totalPages}
+        />
+      </section>
 
       {/* Events Organized */}
       <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
