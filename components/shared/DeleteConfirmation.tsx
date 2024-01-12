@@ -15,6 +15,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { deleteEvent } from "@/lib/actions/event.action";
 
 export default function DeleteConfirmation({ eventId }: { eventId: string }) {
   const pathname = usePathname();
@@ -43,11 +44,11 @@ export default function DeleteConfirmation({ eventId }: { eventId: string }) {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
 
           <AlertDialogAction
-          //    onClick={() =>
-          //      startTransition(async () => {
-          //        await deleteEvent({ eventId, path: pathname });
-          //      })
-          //    }
+            onClick={() =>
+              startTransition(async () => {
+                await deleteEvent({ eventId, path: pathname });
+              })
+            }
           >
             {isPending ? "Deleting..." : "Delete"}
           </AlertDialogAction>
