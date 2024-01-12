@@ -50,7 +50,7 @@ export default async function Home() {
           data={data?.events || []}
           emptyTitle="No Events Found"
           emptyStatusSubtext="Come back later for more events!"
-          collectionType="Events_Organized"
+          collectionType="All_Events"
           limit={4}
           page={1}
           totalPages={2}
