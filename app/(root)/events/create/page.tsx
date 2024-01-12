@@ -13,7 +13,7 @@ export default function CreateEvents() {
         </h1>
       </section>
       <div className="wrapper my-8">
-        <EventForm userId={userId} type="create" />
+        <EventForm userId={userId} type="Create" />
       </div>
     </>
   );
