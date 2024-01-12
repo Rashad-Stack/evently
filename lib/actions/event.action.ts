@@ -4,6 +4,7 @@ import {
   CreateEventParams,
   DeleteEventParams,
   GetAllEventsParams,
+  GetEventsByUserParams,
   GetRelatedEventsByCategoryParams,
   UpdateEventParams,
 } from "@/types";
@@ -144,6 +145,36 @@ export const getRelatedEventsByCategory = async ({
       category: categoryId,
       _id: { $ne: eventId },
     };
+
+    const eventQuery = Event.find(conditions)
+      .sort({ createdAt: "desc" })
+      .skip(skipAmount)
+      .limit(limit);
+
+    const events = await populateEvent(eventQuery);
+    const eventCount = await Event.countDocuments(conditions);
+
+    return {
+      events: JSON.parse(JSON.stringify(events)),
+      totalPages: Math.ceil(eventCount / limit),
+    };
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+export const getEventsByUser = async ({
+  userId,
+  limit = 6,
+  page,
+}: GetEventsByUserParams) => {
+  try {
+    await connectToDatabase();
+
+    const conditions = {
+      organizer: userId,
+    };
+    const skipAmount = limit * (Number(page) - 1);
 
     const eventQuery = Event.find(conditions)
       .sort({ createdAt: "desc" })
