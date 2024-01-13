@@ -46,7 +46,7 @@ export default async function ProfilePage({ searchParams }: SearchParamProps) {
           limit={3}
           page={orderPage}
           urlParamName="ordersPage"
-          totalPages={orders?.totalPages}
+          totalPages={orders?.totalPages!}
         />
       </section>
 
@@ -69,7 +69,7 @@ export default async function ProfilePage({ searchParams }: SearchParamProps) {
           limit={3}
           page={eventPage}
           urlParamName="eventsPage"
-          totalPages={organizedEvents?.totalPages}
+          totalPages={organizedEvents?.totalPages!}
         />
       </section>
     </>

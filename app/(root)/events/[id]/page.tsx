@@ -12,6 +12,7 @@ export default async function EventDetails({
   params: { id },
   searchParams,
 }: SearchParamProps) {
+  const page = Number(searchParams?.page) || 1;
   const event = await getEventById(id);
   const data = await getRelatedEventsByCategory({
     categoryId: event.category,
@@ -105,8 +106,8 @@ export default async function EventDetails({
           emptyStatusSubtext="Come back later for more events!"
           collectionType="All_Events"
           limit={3}
-          page={1}
-          totalPages={1}
+          page={page}
+          totalPages={data?.totalPages || 1}
         />
       </section>
     </>
