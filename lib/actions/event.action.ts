@@ -15,6 +15,10 @@ import Event from "../database/models/event.model";
 import User from "../database/models/user.model";
 import { handleError } from "../utils";
 
+const getCategoryByName = async (name: string) => {
+  return Category.findOne({ name: { $regex: name, $options: "i" } });
+};
+
 const populateEvent = async (query: any) => {
   return query
     .populate({
@@ -74,9 +78,15 @@ export const getAllEvents = async ({
     const titleCondition = query
       ? { title: { $regex: query, $options: "i" } }
       : {};
+    const categoryCondition = category
+      ? await getCategoryByName(category)
+      : null;
 
     const conditions = {
-      $and: [titleCondition],
+      $and: [
+        titleCondition,
+        categoryCondition ? { category: categoryCondition._id } : {},
+      ],
     };
 
     const skipAmount = (Number(page) - 1) * limit;
